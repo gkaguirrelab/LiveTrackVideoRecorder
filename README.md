@@ -14,7 +14,7 @@ AUDIO
 TTL pulses that are received from the MRI scanner is converted to audio via a TTL-Audio box designed by UPenn Electronic Shop. Audio pulses are then transferred to the audio channel of the A/D converter.
 
 # Software Requirements 
-ffmpeg 4.1.1 
-python 3 
-IP Camera Viewer - for viewing the feed with a different A/D converter
-pyautogui package https://pypi.org/project/PyAutoGUI/  -  can be installed with: pip install pyautogui
+-ffmpeg 4.1.1 
+-python 3 
+-IP Camera Viewer - for viewing the feed with a different A/D converter
+-pyautogui package https://pypi.org/project/PyAutoGUI/  -  can be installed with: pip install pyautogui
