@@ -1,0 +1,19 @@
+{
+	"protocol": "Test Protocol",
+	"outputpath": "/home/ozzy/Desktop",
+	"comments": "This is a test protocol",
+	"runs": {
+		"run1_test": {
+			"length": "00:01:30"
+		},
+		"run2_test": {
+			"length": "00:00:52"
+		},
+		"run3_test": {
+			"length": "00:01:12"
+		},
+		"run4_test": {
+			"length": "00:02:04"
+		}
+	}
+}
