@@ -1,7 +1,7 @@
 # LiveTrackVideoRecorder
 Python code that operates under Windows to record video input via ffmpeg commands
 
-This python code starts a GUI program which interacts with ffmpeg and allows users to input recording parameters such as video name, save path, video length, video format, scale, and framerate easily. The browse button allows inputting json protocol files which can be used to auto assign some of the variables according to an MRI scan or experimental protocol. If a protocol file is selected, switch between the runs specified in the json file can be achieved with the right and left arrows. The length adapts automatically when another run is selected via the arrows.
+This python code starts a GUI program which interacts with ffmpeg and allows users to input recording parameters such as video name, save path, video length, video format, scale, and framerate. The browse button allows inputting json protocol files which can be used to auto assign some of the variables according to an MRI scan or experimental protocol. If a protocol file is selected, switch between the runs specified in the json file can be achieved with the right and left arrows. The length adapts automatically when another run is selected via the arrows.
 
 # Equipment configuration
 
