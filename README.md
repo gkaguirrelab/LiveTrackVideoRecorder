@@ -15,6 +15,9 @@ TTL pulses that are received from the MRI scanner is converted to audio via a TT
 
 # Software Requirements 
 -ffmpeg 4.1.1 
+
 -python 3 
--IP Camera Viewer - for viewing the feed with a different A/D converter
+
+-IP Camera Viewer - for viewing the feed with a different A/D 
+
 -pyautogui package https://pypi.org/project/PyAutoGUI/  -  can be installed with: pip install pyautogui
