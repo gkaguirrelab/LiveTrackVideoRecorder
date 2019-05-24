@@ -6,7 +6,7 @@ import os
 import json
 from pyautogui import hotkey
 
-subprocess.Popen("\"C:\\Program Files (x86)\\Deskshare\\IP Camera Viewer 4\\IP Camera Viewer.exe\"")
+subprocess.Popen("\"C:\\Program Files (x86)\\Deskshare\\IP Camera Viewer 4\\IP Camera Viewer.exe\"") #Set this path to IP Camera Viever
 class videoRecord:
     def __init__(self, master):
         todaysDate = time.strftime("%m/%d/%Y")
