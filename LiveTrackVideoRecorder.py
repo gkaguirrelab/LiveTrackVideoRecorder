@@ -7,6 +7,7 @@ import json
 from pyautogui import hotkey
 
 # This is a script which record videos with custom settings
+# Works with ffmpeg
 
 subprocess.Popen("\"C:\\Program Files (x86)\\Deskshare\\IP Camera Viewer 4\\IP Camera Viewer.exe\"") #Set this path to IP Camera Viever
 class videoRecord:
