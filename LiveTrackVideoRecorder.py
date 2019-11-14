@@ -47,7 +47,7 @@ class videoRecord:
         self.frameRate_tail = Label(master, text="fps")
         self.frameRate.insert(END, '29.97')
         self.startbutton = Button(master, text="Start", command=self.recordVid)
-        self.stopbutton = Button(master, text="Stop", command=self.stopVid)
+        self.savebutton = Button(master, text="Save", command=self.saveVid)
 
         self.Date_label.grid(row=0, column=0, sticky=NSEW)
         self.Date.grid(row=0, column=1, sticky=NSEW)
@@ -74,7 +74,7 @@ class videoRecord:
         self.frameRate.grid(row=9, column=1, sticky=NSEW)
         self.frameRate_tail.grid(row=9, column=2, sticky=NSEW)
         self.startbutton.grid(row=10, column=1, sticky=NSEW)
-        self.stopbutton.grid(row=11, column=1, sticky=NSEW)
+        self.savebutton.grid(row=11, column=1, sticky=NSEW)
 
         master.columnconfigure(0, weight=1)
         master.columnconfigure(1, weight=1)
@@ -126,7 +126,11 @@ class videoRecord:
         self.length.insert(END, lengthlist[getfilledindex])
 
     def recordVid(self):
-
+        global id
+        global outputname
+        global cnt
+        global outdir
+        
         id = self.nameID.get()
         ln = self.length.get()
         frmt = self.vidFormat.get()
@@ -137,21 +141,28 @@ class videoRecord:
         outputname = "%s\%s.%s" % (outdir, id, cnt)
 
         if ln == '':
-            command = 'ffmpeg -f dshow -i video="Decklink Video Capture":audio="Decklink Audio Capture" -c:v %s -q:v 0 -y -rtbufsize 100M -vf scale=%s -r %s %s' % (
+            command = 'ffmpeg -f dshow -rtbufsize 1500M -i video="Decklink Video Capture":audio="Decklink Audio Capture" -c:v %s -q:v 0 -y -vf scale=%s -r %s %s' % (
             frmt, scl, fr, outputname)
         else:
-            command = 'ffmpeg -f dshow -i video="Decklink Video Capture":audio="Decklink Audio Capture" -c:v %s -q:v 0 -y -rtbufsize 100M -vf scale=%s -r %s -t %s %s' % (
+            command = 'ffmpeg -f dshow -rtbufsize 1500M -i video="Decklink Video Capture":audio="Decklink Audio Capture" -c:v %s -q:v 0 -y -vf scale=%s -r %s -t %s %s' % (
             frmt, scl, fr, ln, outputname)
         global p 
         p = subprocess.Popen(command)
         return p
-
+        return outputname
+        return id
+        return cnt
+        
     def updatesMELA(self):
         self.outputDir.insert(END, outputz)
 
-    def stopVid(self):
+    def saveVid(self):
         p.kill()
-
+        savefolder = os.path.join('C:\\Users\\LDOG_experimenter\\Desktop\\savehere\\')
+        freshvid = os.path.join(outdir,id + '.' + cnt)
+        process = 'copy %s %s' % (freshvid, savefolder)
+        print(process)
+        os.system(process)
 
 root = Tk()
 root.title('GKAguirrelab Video Recorder')
