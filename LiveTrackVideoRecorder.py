@@ -1,10 +1,12 @@
 from tkinter import *
 from tkinter import filedialog
 import time
+from datetime import date
 import subprocess
 import os
 import json
 from pyautogui import hotkey
+import sys
 
 # This is a script which record videos with custom settings
 # Works with ffmpeg
@@ -23,6 +25,8 @@ class videoRecord:
         self.protocol_button = Button(master, text="Browse", command=self.browse_button)
         self.selected_label = Label(master, text="Selected")
         self.selected_name = Label(master, text ="None")
+        self.subjectID_label = Label(master, text="SubjectID")
+        self.subjectID = Entry(master)
         self.nameID_label = Label(master, text="Name")
         self.nameID = Entry(master)
         self.arrowleft = Button(master, text="<-", command=self.leftarw)
@@ -55,26 +59,28 @@ class videoRecord:
         self.protocol_button.grid(row=1, column=1, sticky=NSEW)
         self.selected_label.grid(row=2, column=0, sticky=NSEW)
         self.selected_name.grid(row=2, column=1, sticky=NSEW)
-        self.nameID_label.grid(row=3, column=0, sticky=NSEW)
-        self.nameID.grid(row=3, column=1, sticky=NSEW)
-        self.arrowleft.grid(row=3, column=2, sticky=NSEW)
-        self.arrowright.grid(row=3, column=3, sticky=NSEW)
-        self.outputDir_label.grid(row=4, column=0, sticky=NSEW)
-        self.outputDir.grid(row=4, column=1, sticky=NSEW)
-        self.length_label.grid(row=5, column=0, sticky=NSEW)
-        self.length.grid(row=5, column=1, sticky=NSEW)
-        self.length_tail.grid(row=5, column=2, sticky=NSEW)
-        self.vidFormat_label.grid(row=6, column=0, sticky=NSEW)
-        self.vidFormat.grid(row=6, column=1, sticky=NSEW)
-        self.vidContainer_label.grid(row=7, column=0, sticky=NSEW)
-        self.vidContainer.grid(row=7, column=1, sticky=NSEW)
-        self.vidScale_label.grid(row=8, column=0, sticky=NSEW)
-        self.vidScale.grid(row=8, column=1, sticky=NSEW)
-        self.frameRate_label.grid(row=9, column=0, sticky=NSEW)
-        self.frameRate.grid(row=9, column=1, sticky=NSEW)
-        self.frameRate_tail.grid(row=9, column=2, sticky=NSEW)
-        self.startbutton.grid(row=10, column=1, sticky=NSEW)
-        self.savebutton.grid(row=11, column=1, sticky=NSEW)
+        self.subjectID_label.grid(row=3, column=0, sticky=NSEW)
+        self.subjectID.grid(row=3, column=1, sticky=NSEW)       
+        self.nameID_label.grid(row=4, column=0, sticky=NSEW)
+        self.nameID.grid(row=4, column=1, sticky=NSEW)
+        self.arrowleft.grid(row=4, column=2, sticky=NSEW)
+        self.arrowright.grid(row=4, column=3, sticky=NSEW)
+        self.outputDir_label.grid(row=5, column=0, sticky=NSEW)
+        self.outputDir.grid(row=5, column=1, sticky=NSEW)
+        self.length_label.grid(row=6, column=0, sticky=NSEW)
+        self.length.grid(row=6, column=1, sticky=NSEW)
+        self.length_tail.grid(row=6, column=2, sticky=NSEW)
+        self.vidFormat_label.grid(row=7, column=0, sticky=NSEW)
+        self.vidFormat.grid(row=7, column=1, sticky=NSEW)
+        self.vidContainer_label.grid(row=8, column=0, sticky=NSEW)
+        self.vidContainer.grid(row=8, column=1, sticky=NSEW)
+        self.vidScale_label.grid(row=9, column=0, sticky=NSEW)
+        self.vidScale.grid(row=9, column=1, sticky=NSEW)
+        self.frameRate_label.grid(row=10, column=0, sticky=NSEW)
+        self.frameRate.grid(row=10, column=1, sticky=NSEW)
+        self.frameRate_tail.grid(row=10, column=2, sticky=NSEW)
+        self.startbutton.grid(row=11, column=1, sticky=NSEW)
+        self.savebutton.grid(row=12, column=1, sticky=NSEW)
 
         master.columnconfigure(0, weight=1)
         master.columnconfigure(1, weight=1)
@@ -146,7 +152,7 @@ class videoRecord:
         else:
             command = 'ffmpeg -f dshow -rtbufsize 1500M -i video="Decklink Video Capture":audio="Decklink Audio Capture" -c:v %s -q:v 0 -y -vf scale=%s -r %s -t %s %s' % (
             frmt, scl, fr, ln, outputname)
-        global p 
+        global p
         p = subprocess.Popen(command)
         return p
         return outputname
@@ -158,7 +164,17 @@ class videoRecord:
 
     def saveVid(self):
         p.kill()
-        savefolder = os.path.join('C:\\Users\\LDOG_experimenter\\Desktop\\savehere\\')
+        existing_subj_folder = 'C:\\Users\\LDOG_experimenter\\"Dropbox (Aguirre-Brainard Lab)"\\LDOG_data\\Experiments\\OLApproach_TrialSequenceMR\\MRMaxFlash\\Videos'
+        
+        # Get date mm/dd/YY
+        today = date.today()
+        date_of_scan = today.strftime("%Y-%m-%d")
+
+        # Get name of the video 
+        name = self.subjectID.get() 
+        savefolder = os.path.join(existing_subj_folder, name, date_of_scan)
+        if not os.path.exists(savefolder):
+            os.system('mkdir %s' % savefolder)
         freshvid = os.path.join(outdir,id + '.' + cnt)
         process = 'copy %s %s' % (freshvid, savefolder)
         print(process)
