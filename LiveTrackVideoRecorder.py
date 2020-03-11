@@ -164,7 +164,7 @@ class videoRecord:
 
     def saveVid(self):
         p.kill()
-        existing_subj_folder = 'C:\\Users\\LDOG_experimenter\\"Dropbox (Aguirre-Brainard Lab)"\\LDOG_data\\Experiments\\OLApproach_TrialSequenceMR\\MRMaxFlash\\Videos'
+        existing_subj_folder = 'C:\\Users\\LDOG_experimenter\\"Dropbox (Aguirre-Brainard Lab)"\\LDOG_data\\Experiments\\OLApproach_TrialSequenceMR\\MRFlickerLDOG\\Videos'
         
         # Get date mm/dd/YY
         today = date.today()
@@ -176,7 +176,7 @@ class videoRecord:
         if not os.path.exists(savefolder):
             os.system('mkdir %s' % savefolder)
         freshvid = os.path.join(outdir,id + '.' + cnt)
-        process = 'copy %s %s' % (freshvid, savefolder)
+        process = 'echo F|xcopy %s %s' % (freshvid, savefolder)
         print(process)
         os.system(process)
 
