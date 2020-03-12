@@ -164,7 +164,7 @@ class videoRecord:
 
     def saveVid(self):
         p.kill()
-        existing_subj_folder = 'C:\\Users\\LDOG_experimenter\\"Dropbox (Aguirre-Brainard Lab)"\\LDOG_data\\Experiments\\OLApproach_TrialSequenceMR\\MRFlickerLDOG\\Videos'
+        existing_subj_folder = 'C:\\Users\\LDOG_experimenter\\"Dropbox (Aguirre-Brainard Lab)"\\LDOG_data\\Experiments\\OLApproach_TrialSequenceMR\\MRScotoLDOG\\Videos'
         
         # Get date mm/dd/YY
         today = date.today()
