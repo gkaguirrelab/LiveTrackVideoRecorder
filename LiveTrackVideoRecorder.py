@@ -164,7 +164,14 @@ class videoRecord:
 
     def saveVid(self):
         p.kill()
-        existing_subj_folder = 'C:\\Users\\LDOG_experimenter\\"Dropbox (Aguirre-Brainard Lab)"\\LDOG_data\\Experiments\\OLApproach_TrialSequenceMR\\MRScotoLDOG\\Videos'
+        
+        # Get the protocol name
+        protocol_name = self.selected_name.get()
+        existing_subj_folder = 'C:\\Users\\LDOG_experimenter\\"Dropbox (Aguirre-Brainard Lab)"\\LDOG_data\\Experiments\\OLApproach_TrialSequenceMR\\%s\\Videos' % protocol_name
+        
+        # If this new protocol does not exist, create it 
+        if not os.path.exists(existing_subj_folder):
+            os.system('mkdir %s' % existing_subj_folder)
         
         # Get date mm/dd/YY
         today = date.today()
@@ -175,7 +182,15 @@ class videoRecord:
         savefolder = os.path.join(existing_subj_folder, name, date_of_scan)
         if not os.path.exists(savefolder):
             os.system('mkdir %s' % savefolder)
-        freshvid = os.path.join(outdir,id + '.' + cnt)
+        fresh_vid_name = id + '.' + cnt
+        freshvid = os.path.join(outdir, fresh_vid_name)
+        
+        # If the video exists in the dropbox path, add _dup to the file name
+        if os.path.exists(freshvid):
+            fresh_vid_name = id + '_dup' + '.' + cnt
+            freshvid = os.path.join(outdir, fresh_vid_name)
+        
+        # Save the video to Dropbox
         process = 'echo F|xcopy %s %s' % (freshvid, savefolder)
         print(process)
         os.system(process)
