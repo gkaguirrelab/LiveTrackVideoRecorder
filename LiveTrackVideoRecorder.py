@@ -51,7 +51,6 @@ class videoRecord:
         self.frameRate_tail = Label(master, text="fps")
         self.frameRate.insert(END, '29.97')
         self.startbutton = Button(master, text="Start", command=self.recordVid)
-        self.savebutton = Button(master, text="Save", command=self.saveVid)
 
         self.Date_label.grid(row=0, column=0, sticky=NSEW)
         self.Date.grid(row=0, column=1, sticky=NSEW)
@@ -80,7 +79,6 @@ class videoRecord:
         self.frameRate.grid(row=10, column=1, sticky=NSEW)
         self.frameRate_tail.grid(row=10, column=2, sticky=NSEW)
         self.startbutton.grid(row=11, column=1, sticky=NSEW)
-        self.savebutton.grid(row=12, column=1, sticky=NSEW)
 
         master.columnconfigure(0, weight=1)
         master.columnconfigure(1, weight=1)
@@ -131,39 +129,12 @@ class videoRecord:
         self.nameID.insert(END, nameslist[getfilledindex])
         self.length.insert(END, lengthlist[getfilledindex])
 
-    def recordVid(self):
-        global id
-        global outputname
-        global cnt
-        global outdir
-        
-        id = self.nameID.get()
-        ln = self.length.get()
-        frmt = self.vidFormat.get()
-        cnt = self.vidContainer.get()
-        scl = self.vidScale.get()
-        fr = self.frameRate.get()
-        outdir = self.outputDir.get()
-        outputname = "%s\%s.%s" % (outdir, id, cnt)
-
-        if ln == '':
-            command = 'ffmpeg -f dshow -rtbufsize 1500M -i video="Decklink Video Capture":audio="Decklink Audio Capture" -c:v %s -q:v 0 -y -vf scale=%s -r %s %s' % (
-            frmt, scl, fr, outputname)
-        else:
-            command = 'ffmpeg -f dshow -rtbufsize 1500M -i video="Decklink Video Capture":audio="Decklink Audio Capture" -c:v %s -q:v 0 -y -vf scale=%s -r %s -t %s %s' % (
-            frmt, scl, fr, ln, outputname)
-        global p
-        p = subprocess.Popen(command)
-        return p
-        return outputname
-        return id
-        return cnt
-        
-    def updatesMELA(self):
-        self.outputDir.insert(END, outputz)
-
     def saveVid(self):
         p.kill()
+        
+        # Get some paths
+        cnt = self.vidContainer.get()
+        outdir = self.outputDir.get()        
         
         # Get the protocol name
         protocol_name = self.selected_name.get()
@@ -194,6 +165,38 @@ class videoRecord:
         process = 'echo F|xcopy %s %s' % (freshvid, savefolder)
         print(process)
         os.system(process)
+        
+    def recordVid(self):
+        global id
+        global outputname
+        global cnt
+        global outdir
+        
+        id = self.nameID.get()
+        ln = self.length.get()
+        frmt = self.vidFormat.get()
+        cnt = self.vidContainer.get()
+        scl = self.vidScale.get()
+        fr = self.frameRate.get()
+        outdir = self.outputDir.get()
+        outputname = "%s\%s.%s" % (outdir, id, cnt)
+
+        if ln == '':
+            command = 'ffmpeg -f dshow -rtbufsize 1500M -i video="Decklink Video Capture":audio="Decklink Audio Capture" -c:v %s -q:v 0 -y -vf scale=%s -r %s %s' % (
+            frmt, scl, fr, outputname)
+        else:
+            command = 'ffmpeg -f dshow -rtbufsize 1500M -i video="Decklink Video Capture":audio="Decklink Audio Capture" -c:v %s -q:v 0 -y -vf scale=%s -r %s -t %s %s' % (
+            frmt, scl, fr, ln, outputname)
+        global p
+        p = subprocess.Popen(command)
+        return p
+        return outputname
+        return id
+        return cnt
+        self.saveVid()
+    
+    def updatesMELA(self):
+        self.outputDir.insert(END, outputz)
 
 root = Tk()
 root.title('GKAguirrelab Video Recorder')
