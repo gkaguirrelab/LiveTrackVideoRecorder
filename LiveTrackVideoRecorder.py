@@ -107,7 +107,6 @@ class videoRecord:
             self.nameID.insert(END, nameslist[n])
             self.outputDir.insert(END, outputz)
             self.length.insert(END, lengthlist[n])
-            #self.selected_name.delete(0,END)
             self.selected_name.config(text=protname)
         return n
 
@@ -129,16 +128,15 @@ class videoRecord:
         self.nameID.insert(END, nameslist[getfilledindex])
         self.length.insert(END, lengthlist[getfilledindex])
 
-    def saveVid(self):
-        p.kill()
-        
+    def saveVid(self): 
         # Get some paths
         cnt = self.vidContainer.get()
         outdir = self.outputDir.get()        
         
         # Get the protocol name
-        protocol_name = self.selected_name.get()
+        protocol_name = self.selected_name.cget('text')
         existing_subj_folder = 'C:\\Users\\LDOG_experimenter\\"Dropbox (Aguirre-Brainard Lab)"\\LDOG_data\\Experiments\\OLApproach_TrialSequenceMR\\%s\\Videos' % protocol_name
+        # THIS LINE IS FOR TESTING: existing_subj_folder = 'C:\\Users\\ozenc\\Desktop\\%s\\Videos' % protocol_name
         
         # If this new protocol does not exist, create it 
         if not os.path.exists(existing_subj_folder):
@@ -153,33 +151,45 @@ class videoRecord:
         savefolder = os.path.join(existing_subj_folder, name, date_of_scan)
         if not os.path.exists(savefolder):
             os.system('mkdir %s' % savefolder)
-        fresh_vid_name = id + '.' + cnt
+        fresh_vid_name = id_vid + '.' + cnt
         freshvid = os.path.join(outdir, fresh_vid_name)
         
         # If the video exists in the dropbox path, add _dup to the file name
-        if os.path.exists(freshvid):
-            fresh_vid_name = id + '_dup' + '.' + cnt
-            freshvid = os.path.join(outdir, fresh_vid_name)
+        if os.path.exists(os.path.join(savefolder, fresh_vid_name)):
+            modded_new_name = id_vid + '_dup01' + '.' + cnt        
+            if os.path.exists(os.path.join(savefolder, modded_new_name)):
+                modded_new_name = id_vid + '_dup02' + '.' + cnt
+                if os.path.exists(os.path.join(savefolder, modded_new_name)):
+                    modded_new_name = id_vid + '_dup03' + '.' + cnt
+                    if os.path.exists(os.path.join(savefolder, modded_new_name)):
+                        modded_new_name = id_vid + '_dup04' + '.' + cnt
+                        if os.path.exists(os.path.join(savefolder, modded_new_name)):
+                            modded_new_name = id_vid + '_dup05' + '.' + cnt  
+                            if os.path.exists(os.path.join(savefolder, modded_new_name)):
+                                modded_new_name = id_vid + '_dup06' + '.' + cnt
+            save_path = os.path.join(savefolder, modded_new_name)                
+        else:
+            save_path = os.path.join(savefolder, fresh_vid_name)
         
         # Save the video to Dropbox
-        process = 'echo F|xcopy %s %s' % (freshvid, savefolder)
+        process = 'copy %s %s' % (freshvid, save_path)
         print(process)
         os.system(process)
         
     def recordVid(self):
-        global id
+        global id_vid
         global outputname
         global cnt
         global outdir
         
-        id = self.nameID.get()
+        id_vid = self.nameID.get()
         ln = self.length.get()
         frmt = self.vidFormat.get()
         cnt = self.vidContainer.get()
         scl = self.vidScale.get()
         fr = self.frameRate.get()
         outdir = self.outputDir.get()
-        outputname = "%s\%s.%s" % (outdir, id, cnt)
+        outputname = "%s\%s.%s" % (outdir, id_vid, cnt)
 
         if ln == '':
             command = 'ffmpeg -f dshow -rtbufsize 1500M -i video="Decklink Video Capture":audio="Decklink Audio Capture" -c:v %s -q:v 0 -y -vf scale=%s -r %s %s' % (
@@ -187,12 +197,10 @@ class videoRecord:
         else:
             command = 'ffmpeg -f dshow -rtbufsize 1500M -i video="Decklink Video Capture":audio="Decklink Audio Capture" -c:v %s -q:v 0 -y -vf scale=%s -r %s -t %s %s' % (
             frmt, scl, fr, ln, outputname)
-        global p
-        p = subprocess.Popen(command)
-        return p
-        return outputname
-        return id
-        return cnt
+            
+        # THIS LINE IS FOR TESTING: command = 'ffmpeg -f dshow -rtbufsize 1500M -i video="HD Webcam":audio="Microphone (Realtek(R) Audio)" -c:v %s -q:v 0 -y -vf scale=%s -r %s -t %s %s' % (frmt, scl, fr, ln, outputname)
+        os.system(command)
+        print('Saving the video to  Dropbox')
         self.saveVid()
     
     def updatesMELA(self):
