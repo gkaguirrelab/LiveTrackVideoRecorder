@@ -1,6 +1,6 @@
 {
-	"protocol": "Test Protocol",
-	"outputpath": "/home/ozzy/Desktop",
+	"protocol": "test_protocol",
+	"outputpath": "C:\\Users\\ozenc\\Desktop\\",
 	"comments": "This is a test protocol",
 	"runs": {
 		"run1_test": {
