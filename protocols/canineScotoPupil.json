@@ -1,0 +1,36 @@
+{
+	"mainDataFolder": "LDOG_data",
+	"experiment": "OLApproach_TrialSequenceMR",
+	"protocol": "PupilScotoLDOG",
+	"initialOutputPath": "C:\\Users\\LDOG_experimenter\\Desktop\\",
+	"comments": "This is the eye tracking protocol for canine scotopic pupil studies.",
+	"runs": {
+		"pupil_LightFlux_1-6Hz_01": {
+			"length": "00:06:00"
+		},
+		"pupil_LightFlux_1-6Hz_02": {
+			"length": "00:06:00"
+		},
+		"pupil_LightFlux_1-6Hz_03": {
+			"length": "00:06:00"
+		},
+		"pupil_RodMel_1-6Hz_04": {
+			"length": "00:06:00"
+		},
+		"pupil_RodMel_1-6Hz_05": {
+			"length": "00:06:00"
+		},
+		"pupil_RodMel_1-6Hz_06": {
+			"length": "00:06:00"
+		},
+		"pupil_LplusS_1-6Hz_07": {
+			"length": "00:06:00"
+		},
+		"pupil_LplusS_1-6Hz_08": {
+			"length": "00:06:00"
+		},
+		"pupil_LplusS_1-6Hz_09": {
+			"length": "00:06:00"
+		}
+	}
+}
