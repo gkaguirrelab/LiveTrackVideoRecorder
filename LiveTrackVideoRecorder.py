@@ -258,7 +258,7 @@ class videoRecord:
             frmt, scl, fr, ln, outputname)
             
         # THIS LINE IS FOR TESTING WITH THE LAPTOP CAMERA:
-        command = 'ffmpeg -f dshow -rtbufsize 1500M -i video="FaceTime HD Camera" -c:v %s -q:v 0 -y -vf scale=%s -r %s -t %s %s' % (frmt, scl, fr, ln, outputname)
+        # command = 'ffmpeg -f dshow -rtbufsize 1500M -i video="FaceTime HD Camera" -c:v %s -q:v 0 -y -vf scale=%s -r %s -t %s %s' % (frmt, scl, fr, ln, outputname)
         os.system(command)
         print('Saving the video to  Dropbox')
         self.saveVid()
