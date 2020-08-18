@@ -195,7 +195,8 @@ class videoRecord:
         exp_name = self.experiment_name.cget('text')
         protocol_name = self.selected_name.cget('text')
         existing_subj_folder = 'C:\\Users\\LDOG_experimenter\\"Dropbox (Aguirre-Brainard Lab)"\\%s\\Experiments\\%s\\%s\\Videos' % (folder_name, exp_name, protocol_name)
-        # THIS LINE IS FOR TESTING: existing_subj_folder = 'C:\\Users\\ozenc\\Desktop\\%s\\Videos' % protocol_name
+        # THIS NEXT LINE IS FOR TESTING:
+        # existing_subj_folder = 'C:\\Users\\ozenc\\Desktop\\%s\\Videos' % protocol_name
         
         # If this new protocol does not exist, create it 
         if not os.path.exists(existing_subj_folder):
@@ -257,7 +258,7 @@ class videoRecord:
             command = 'ffmpeg -f dshow -rtbufsize 1500M -i video="Decklink Video Capture":audio="Decklink Audio Capture" -c:v %s -q:v 0 -y -vf scale=%s -r %s -t %s %s' % (
             frmt, scl, fr, ln, outputname)
             
-        # THIS LINE IS FOR TESTING WITH THE LAPTOP CAMERA:
+        # THIS NEXT LINE IS FOR TESTING WITH THE LAPTOP CAMERA:
         # command = 'ffmpeg -f dshow -rtbufsize 1500M -i video="FaceTime HD Camera" -c:v %s -q:v 0 -y -vf scale=%s -r %s -t %s %s' % (frmt, scl, fr, ln, outputname)
         os.system(command)
         print('Saving the video to  Dropbox')
