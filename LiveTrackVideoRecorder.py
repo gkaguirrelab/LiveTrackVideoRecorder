@@ -75,6 +75,8 @@ class videoRecord:
         self.frameRate.insert(END, '29.97')
         # Startbutton
         self.startbutton = Button(master, text="Start", command=self.recordVid)
+        # Savebutton
+        self.savebutton = Button(master, text="Save", command=self.saveVid)        
 
         ################################## PLACE WIDGETS AND BUTTONS ##############################################
 
@@ -123,6 +125,8 @@ class videoRecord:
         self.frameRate_tail.grid(row=12, column=2, sticky=NSEW)
         # Start button
         self.startbutton.grid(row=13, column=1, sticky=NSEW)
+        # Save button
+        self.savebutton.grid(row=14, column=1, sticky=NSEW)
 
         # Some column size specifications
         master.columnconfigure(0, weight=1)
@@ -185,7 +189,9 @@ class videoRecord:
         self.nameID.insert(END, nameslist[getfilledindex])
         self.length.insert(END, lengthlist[getfilledindex])
 
-    def saveVid(self): 
+    def saveVid(self):
+        print('Saving the video to  Dropbox')
+        
         # Get some paths
         cnt = self.vidContainer.get()
         outdir = self.outputDir.get()        
@@ -259,10 +265,12 @@ class videoRecord:
             frmt, scl, fr, ln, outputname)
             
         # THIS NEXT LINE IS FOR TESTING WITH THE LAPTOP CAMERA:
-        # command = 'ffmpeg -f dshow -rtbufsize 1500M -i video="FaceTime HD Camera" -c:v %s -q:v 0 -y -vf scale=%s -r %s -t %s %s' % (frmt, scl, fr, ln, outputname)
-        os.system(command)
-        print('Saving the video to  Dropbox')
-        self.saveVid()
+        # command = 'ffmpeg -f dshow -rtbufsize 1500M -i video="HD Webcam" -c:v %s -q:v 0 -y -vf scale=%s -r %s -t %s %s' % (frmt, scl, fr, ln, outputname)
+        p = subprocess.Popen(command)
+        return p
+        return outputname
+        return id
+        return cnt
     
     def updatesMELA(self):
         self.outputDir.insert(END, outputz)
