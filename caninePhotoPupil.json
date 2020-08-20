@@ -1,0 +1,61 @@
+{
+	"protocol": "PupilPhotoLDOG",
+	"outputpath":  "C:\\Users\\LDOG_experimenter\\Desktop\\",
+	"comments": "This is a test protocol",
+        "runs": {
+		"pupil_LightFlux_1-6Hz_RightEyeStim_01": {
+			"length": "00:06:00"
+		},
+		"pupil_RodMel_1-6Hz_RightEyeStim_02": {
+			"length": "00:06:00"
+		},
+		"pupil_LplusS_1-6Hz_RightEyeStim_03": {
+			"length": "00:06:00"
+		},
+		"pupil_LightFlux_1-6Hz_LeftEyeStim_04": {
+			"length": "00:06:00"
+		},
+		"pupil_RodMel_1-6Hz_LeftEyeStim_05": {
+			"length": "00:06:00"
+		},
+		"pupil_LplusS_1-6Hz_LeftEyeStim_06": {
+			"length": "00:06:00"
+		},
+		"pupil_LightFlux_1-6Hz_RightEyeStim_07": {
+			"length": "00:06:00"
+		},
+		"pupil_RodMel_1-6Hz_RightEyeStim_08": {
+			"length": "00:06:00"
+		},
+		"pupil_LplusS_1-6Hz_RightEyeStim_09": {
+			"length": "00:06:00"
+		},
+		"pupil_LightFlux_1-6Hz_LeftEyeStim_10": {
+			"length": "00:06:00"
+		},
+		"pupil_RodMel_1-6Hz_LeftEyeStim_11": {
+			"length": "00:06:00"
+		},
+		"pupil_LplusS_1-6Hz_LeftEyeStim_12": {
+			"length": "00:06:00"
+		},
+		"pupil_LightFlux_1-6Hz_RightEyeStim_13": {
+			"length": "00:06:00"
+		},
+		"pupil_RodMel_1-6Hz_RightEyeStim_14": {
+			"length": "00:06:00"
+		},
+		"pupil_LplusS_1-6Hz_RightEyeStim_15": {
+			"length": "00:06:00"
+		},
+		"pupil_LightFlux_1-6Hz_LeftEyeStim_16": {
+			"length": "00:06:00"
+		},
+		"pupil_RodMel_1-6Hz_LeftEyeStim_17": {
+			"length": "00:06:00"
+		},
+		"pupil_LplusS_1-6Hz_LeftEyeStim_18": {
+			"length": "00:06:00"
+		}
+	}
+}
