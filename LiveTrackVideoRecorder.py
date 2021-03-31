@@ -11,7 +11,7 @@ import sys
 # This is a script which record videos with custom settings
 # Works with ffmpeg
 
-subprocess.Popen("\"C:\\Program Files (x86)\\Deskshare\\IP Camera Viewer 4\\IP Camera Viewer.exe\"") #Set this path to IP Camera Viever
+# subprocess.Popen("\"C:\\Program Files (x86)\\Deskshare\\IP Camera Viewer 4\\IP Camera Viewer.exe\"") #Set this path to IP Camera Viever
 class videoRecord:
     def __init__(self, master):
         todaysDate = time.strftime("%m/%d/%Y")
@@ -165,6 +165,9 @@ class videoRecord:
     def saveVid(self):
         p.kill()
         existing_subj_folder = 'C:\\Users\\LDOG_experimenter\\"Dropbox (Aguirre-Brainard Lab)"\\LDOG_data\\Experiments\\OLApproach_TrialSequenceMR\\MRScotoLDOG\\Videos'
+        selected_path_name = self.selected_name.get()
+        if selected_path_name == 'AGTC':
+            existing_subj_folder = 'C:\\Users\\LDOG_experimenter\\"Dropbox (Aguirre-Brainard Lab)"\\AGTC_data\\Videos'
         
         # Get date mm/dd/YY
         today = date.today()
