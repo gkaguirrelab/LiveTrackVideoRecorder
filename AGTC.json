@@ -1,0 +1,24 @@
+{
+	"protocol": "AGTC",
+	"outputpath":  "C:\\Users\\LDOG_experimenter\\Desktop\\",
+	"comments": "This is a test protocol",
+        "runs": {
+		"pRF_run01": {
+			"length": "00:03:25"
+		},
+		"pRF_run02": {
+			"length": "00:03:25"
+		},
+		"VentralA_run01": {
+			"length": "00:05:17"
+		},
+		"VentralB_run01": {
+			"length": "00:05:17"
+		},
+		"pRF_run03": {
+			"length": "00:03:25"
+		},
+		"pRF_run04": {
+			"length": "00:03:25"
+		}
+}
