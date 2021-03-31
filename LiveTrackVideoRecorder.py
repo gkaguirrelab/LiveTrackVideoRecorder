@@ -165,7 +165,7 @@ class videoRecord:
     def saveVid(self):
         p.kill()
         existing_subj_folder = 'C:\\Users\\LDOG_experimenter\\"Dropbox (Aguirre-Brainard Lab)"\\LDOG_data\\Experiments\\OLApproach_TrialSequenceMR\\MRScotoLDOG\\Videos'
-        selected_path_name = self.selected_name.get()
+        selected_path_name = self.selected_name.cget(("text"))
         if selected_path_name == 'AGTC':
             existing_subj_folder = 'C:\\Users\\LDOG_experimenter\\"Dropbox (Aguirre-Brainard Lab)"\\AGTC_data\\Videos'
         
